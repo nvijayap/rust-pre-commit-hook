@@ -25,7 +25,11 @@ fn main() {
         std::process::exit(1);
     }
 
-    // 1. Run snyk test to check formatting
+    // 3. Run "cargo clippy" ...
+    // Cargo Clippy is a tool that checks Rust code for common mistakes and suggests 
+    // improvements to enhance code quality and adherence to idiomatic Rust practices. 
+    // It provides warnings across various categories, 
+    // such as correctness, style, and performance.
     let fmt_status = Command::new("cargo")
         .args(["clippy"])
         .status()
