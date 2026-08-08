@@ -30,13 +30,24 @@ fn main() {
     // improvements to enhance code quality and adherence to idiomatic Rust practices. 
     // It provides warnings across various categories, 
     // such as correctness, style, and performance.
-    let fmt_status = Command::new("cargo")
+    let clippy_status = Command::new("cargo")
         .args(["clippy"])
         .status()
-        .expect("Failed to execute cargo clippy");
+        .expect("Failed to execute 'cargo clippy'");
 
-    if !fmt_status.success() {
+    if !clippy_status.success() {
         eprintln!("❌ Error: clippy issues found. Run 'cargo clippy' to fix.");
+        std::process::exit(1);
+    }
+
+    // 4. Run "cargo audit" ...
+    let audit_status = Command::new("cargo")
+        .args(["audit"])
+        .status()
+        .expect("Failed to execute 'cargo audit'");
+
+    if !audit_status.success() {
+        eprintln!("❌ Error: audit issues found. Run 'cargo audit' to fix.");
         std::process::exit(1);
     }
 
