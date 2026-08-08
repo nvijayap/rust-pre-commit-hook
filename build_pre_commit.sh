@@ -2,4 +2,8 @@
 
 # build_pre_commit.sh - build pre-commit binary
 
-cargo build --release
+cd `dirname $0`
+
+printf "\nBuilding ...\n\n"
+
+cargo build --release && echo

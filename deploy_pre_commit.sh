@@ -2,8 +2,13 @@
 
 # deploy_pre_commit.sh - copies pre-commit to a local git repo's root dir
 
+cd `dirname $0`
+
 if [ $# -ne 1 ]; then
   printf "\nNeed local git repo's path as arg\n\n"; exit 1
 fi
 
-cp target/release/pre-commit $1/.git/hooks/
+printf "\nBuilding and deploying ...\n\n"
+
+cargo build --release && \
+  cp target/release/pre-commit $1/.git/hooks/ && echo
